@@ -25,7 +25,7 @@ app.get('/libro', (req, res) => {
 
 })
 
-// Obtener solo un profesor
+// Obtener solo un libro
 app.get('/libro/:idlibro', (req, res) => {
     const { idlibro } = req.params;
     const db = new Database()
@@ -39,7 +39,7 @@ app.get('/libro/:idlibro', (req, res) => {
 
 })
 
-                    //REquest peticion     response  response
+//REquest peticion     response  response
 app.post('/libro', (req, res) => {
     const body = req.body;
     console.log (body);
