@@ -130,8 +130,8 @@ app.post('/lector', (req, res) => {
     const cn = db.getConnection()
 
     const query = `INSERT INTO LECTOR     
-                (titulo, anio) VALUES
-                 (?,?)`;
+                (nombre, apellido, telefono) VALUES
+                 (?,?,?)`;
 
     cn.execute(
         query, [body.nombre, body.apellido, body.telefono],
@@ -172,6 +172,90 @@ app.put('/lector', (req, res) => {
         }
     );
 })
+
+//
+//
+//                      Tabla usuario
+//
+//
+
+app.get('/usuario', (req, res) => {
+    const db = new Database()
+    const cn = db.getConnection()
+    cn.execute(
+        'SELECT * FROM usuario', [],
+        function (err, results, fields) {
+            res.json(results)
+        }
+    );
+
+})
+
+// Obtener solo un lector
+app.get('/usuario/:idUsuario', (req, res) => {
+    const { idUsuario } = req.params;
+    const db = new Database()
+    const cn = db.getConnection()
+    cn.execute(
+        'SELECT * FROM usuario WHERE idUsuario = ?', [idUsuario],
+        function (err, results, fields) {
+            res.json(results[0])
+        }
+    );
+
+})
+
+                    //REquest peticion     response  response
+app.post('/usuario', (req, res) => {
+    const body = req.body;
+    console.log (body);
+    const db = new Database()
+    const cn = db.getConnection()
+
+    const query = `INSERT INTO USUARIO     
+                (username, password, status) VALUES
+                 (?,?,?)`;
+
+    cn.execute(
+        query, [body.username, body.password, body.status],
+        function (err, results, fields) {
+            if (err) {
+                res.status(500).json({
+                    message: err.message
+                })
+            }
+            else {
+                res.json(body)
+            }
+        }
+    );
+})
+
+//update
+app.put('/usuario', (req, res) => {
+    const body = req.body;
+    console.log (body);
+    const db = new Database()
+    const cn = db.getConnection()
+
+    const query = `UPDATE USUARIO     
+                SET username=?, password=?, status=?=? 
+                WHERE idUsuario = ?`;
+    cn.execute(
+        query, [body.username, body.password, body.status, body.idUsuario],
+        function (err, results, fields) {
+            if (err) {
+                res.status(500).json({
+                    message: err.message
+                })
+            }
+            else {
+                res.json(body)
+            }
+        }
+    );
+})
+
 
 
 
