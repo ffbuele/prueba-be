@@ -73,7 +73,7 @@ app.put('/libro', (req, res) => {
     const cn = db.getConnection()
 
     const query = `UPDATE LIBRO     
-                SET titulo=?, anio=?=? 
+                SET titulo=?, anio=?
                 WHERE idlibro = ?`;
     cn.execute(
         query, [body.titulo, body.anio, body.idlibro],
@@ -156,7 +156,7 @@ app.put('/lector', (req, res) => {
     const cn = db.getConnection()
 
     const query = `UPDATE LECTOR     
-                SET nombre=?, apellido=?, telefono=?=? 
+                SET nombre=?, apellido=?, telefono=?
                 WHERE idlector = ?`;
     cn.execute(
         query, [body.nombre, body.apellido, body.telefono, body.idlector],
@@ -239,7 +239,7 @@ app.put('/usuario', (req, res) => {
     const cn = db.getConnection()
 
     const query = `UPDATE USUARIO     
-                SET username=?, password=?, status=?=? 
+                SET username=?, password=?, status=?
                 WHERE idUsuario = ?`;
     cn.execute(
         query, [body.username, body.password, body.status, body.idUsuario],
